@@ -31,7 +31,7 @@ def get_divisors(n):
     return small_divisors + large_divisors[::-1]
 
 
-# GCD(최소 공약수 유클리드 호재법)
+# GCD(최대 공약수 유클리드 호재법)
 def gcd(a, b):
     a, b = abs(a), abs(b)
     while b:
@@ -39,7 +39,7 @@ def gcd(a, b):
     return a
 
 
-# LCM(최대 공배수) 은 GCD 를 이용
+# LCM(최소 공배수) 은 GCD 를 이용
 def lcm(a, b):
     return abs(a * b) // gcd(a, b)
 
