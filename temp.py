@@ -10,7 +10,6 @@ def main():
     read = [*map(int, stdin.read().rstrip().split())]
     n, arr = read[0], read[1:]
 
-
 if __name__ == "__main__":
     main()
 

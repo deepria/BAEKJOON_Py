@@ -14,6 +14,25 @@ match i:
             arr2.append(temp)
         arr2.append('0.\n')
         print(*arr2,sep=', ')
+    case 3:
+        def fractal_block(level):
+            if level == 1:
+                return ['####', '#.#', '##', '#']
+            prev = fractal_block(level - 1)
+            expanded = []
+            for idx, line in enumerate(prev, start=1):
+                dots = '.' * (idx - 1)
+                expanded.append(line + dots + line)
+            return expanded + prev
+        block = fractal_block(9)
+        block[506] = block[506][:450]+'####..##..##.######..##...##..##.....####...####..###..####...##..##'
+        block[507] = block[507][:449]+'##..##.###.##...##...####..##.##.....##..##.##..##..##.##..##..#...#'
+        block[508] = block[508][:449]+'##..##.##.###...##..##..##.####.........##..##..##..##.##..##..####'
+        block[509] = block[509][:449]+'##..##.##..##...##..######.##.##......##....##..##..##.##..##..#.#'
+        block[510] = block[510][:450]+'####..##..##...##..##..##.##..##....######..####...##..####...##'
+        for b in block:
+            print(b)
+        print()
+    case 4:
 
-print(result)
 

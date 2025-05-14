@@ -1,29 +1,39 @@
-def generate_recursive_block(size: int) -> list[str]:
-    """
-    Generates a recursive ASCII pyramid block of given size.
-    Size must be a power of 2 (e.g. 4, 8, 16, ...).
-    """
-    if size < 1:
-        return []
-
-    lines = []
-
-    # 1. 상단 4줄 고정 패턴
-    lines.append("#" * size)  # 전부 #
-    lines.append(("#." * (size // 2))[:size])  # 교차형
-    lines.append(("##" + ".." * ((size - 2) // 2))[:size])  # 연속형
-    lines.append(("#" + "..." * ((size - 1) // 3))[:size])  # 바깥만 #
-
-    if size > 4:
-        lines += generate_recursive_block(size // 2)
-
-    return lines
+def fractal_block(level):
+    if level == 1:
+        return ['####', '#.#', '##', '#']
+    prev = fractal_block(level - 1)
+    expanded = []
+    for idx, line in enumerate(prev, start=1):
+        dots = '.' * (idx - 1)
+        expanded.append(line + dots + line)
+    return expanded + prev
 
 
-def generate_pyramid_auto(h):
-    return "\n".join(generate_recursive_block(h))
+file_path = "gen3.out"
+try:
+    with open(file_path, "r", encoding="utf-8", errors="ignore") as file:
+        lines = file.readlines()
+    block = fractal_block(9)
+    block[506] = block[506][:450] + '####..##..##.######..##...##..##.....####...####..###..####...##..##'
+    block[507] = block[507][:449] + '##..##.###.##...##...####..##.##.....##..##.##..##..##.##..##..#...#'
+    block[508] = block[508][:449] + '##..##.##.###...##..##..##.####.........##..##..##..##.##..##..####'
+    block[509] = block[509][:449] + '##..##.##..##...##..######.##.##......##....##..##..##.##..##..#.#'
+    block[510] = block[510][:450] + '####..##..##...##..##..##.##..##....######..####...##..####...##'
+    # print(len(lines))
+    # print(len(block))
 
+    for i in range(506, 511):
+        print(block[i][440:])
 
-# 예시 실행
-if __name__ == "__main__":
-    print(generate_pyramid_auto(16))
+    # for i in range(1024):
+    #     if lines[i].strip() != block[i]:
+    #         print(f'i:{i}')
+    #         print(f'lines[i]: {lines[i]}')
+    #         print(f'block[i]: {block[i]}')
+
+    print('****************EOF****************')
+
+except FileNotFoundError:
+    print("파일을 찾을 수 없습니다.")
+except Exception as e:
+    print(f"오류 발생: {e}")
