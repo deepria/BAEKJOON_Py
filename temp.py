@@ -1,5 +1,6 @@
-def main():
+def main_temp():
     from sys import stdin, stdout
+    read = stdin.readlines()
     read = stdin.read().splitlines()
     n = int(read[0])
     n, m = map(int, read[0])
@@ -8,7 +9,14 @@ def main():
     n, m = map(int, read().split())
 
     read = [*map(int, stdin.read().rstrip().split())]
+    read = list(map(int, stdin.read().strip().split()))
     n, arr = read[0], read[1:]
+
+
+def main():
+    from sys import stdin, stdout
+    read = stdin.readlines()
+
 
 if __name__ == "__main__":
     main()
